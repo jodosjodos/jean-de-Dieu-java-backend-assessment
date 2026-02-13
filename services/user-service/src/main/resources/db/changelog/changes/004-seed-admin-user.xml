@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="004-seed-admin-user" author="teletrack360">
+        <!-- Default admin user (password: Admin@123) -->
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="email" value="admin@teletrack360.com"/>
+            <column name="password_hash" value="$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a"/>
+            <column name="first_name" value="System"/>
+            <column name="last_name" value="Administrator"/>
+            <column name="role" value="ADMIN"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <!-- Default operator user (password: Operator@123) -->
+        <insert tableName="users">
+            <column name="username" value="operator"/>
+            <column name="email" value="operator@teletrack360.com"/>
+            <column name="password_hash" value="$2a$10$vQ.bEhJZLRbmCHWuJ7w3bO8Yp2r7V6xB3pLk5A9D7sN6Y8MJ3xKPu"/>
+            <column name="first_name" value="Test"/>
+            <column name="last_name" value="Operator"/>
+            <column name="role" value="OPERATOR"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <!-- Default support user (password: Support@123) -->
+        <insert tableName="users">
+            <column name="username" value="support"/>
+            <column name="email" value="support@teletrack360.com"/>
+            <column name="password_hash" value="$2a$10$7N.w5P8O6VgbP7Y3xQ8R4e9K5L7M8P9Q0R1S2T3U4V5W6X7Y8Z9A0"/>
+            <column name="first_name" value="Test"/>
+            <column name="last_name" value="Support"/>
+            <column name="role" value="SUPPORT"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
