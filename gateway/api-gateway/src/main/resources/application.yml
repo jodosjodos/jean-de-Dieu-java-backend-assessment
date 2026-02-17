@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: api-gateway
+  
+  cloud:
+    gateway:
+      routes:
+        # User Service Routes
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/auth/**, /api/v1/users/**
+          filters:
+            - RewritePath=/api/v1/(?<segment>.*), /api/v1/$\{segment}
+        
+        # Incident Service Routes
+        - id: incident-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/incidents/**
+          filters:
+            - RewritePath=/api/v1/(?<segment>.*), /api/v1/$\{segment}
+        
+        # Reporting Service Routes
+        - id: reporting-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/reports/**
+          filters:
+            - RewritePath=/api/v1/(?<segment>.*), /api/v1/$\{segment}
+      
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders: "*"
+            exposedHeaders:
+              - Authorization
+
+server:
+  port: 8080
+
+# JWT Configuration
+jwt:
+  secret: TeleTrack360SecretKeyForJWTTokenGenerationAndValidationPurposesOnly
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,gateway
+  endpoint:
+    gateway:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  level:
+    root: INFO
+    com.teletrack360: DEBUG
+    org.springframework.cloud.gateway: DEBUG
