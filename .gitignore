@@ -24,7 +24,6 @@ out/
 bin/
 
 # VS Code
-.vscode/
 
 # NetBeans
 nbproject/private/
@@ -72,3 +71,7 @@ CI_PIPELINE_REPORT.md
 QUICKSTART.md
 CI_PIPELINE_GUIDE.md
 verify-project.sh
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
