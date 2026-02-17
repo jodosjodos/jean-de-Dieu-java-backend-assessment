@@ -1,0 +1,21 @@
+package com.teletrack360.user.dto;
+
+import jakarta.validation.constraints.Email;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UpdateUserRequest {
+    
+    @Email(message = "Email must be valid")
+    private String email;
+    
+    private String firstName;
+    
+    private String lastName;
+}
